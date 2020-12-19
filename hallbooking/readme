@@ -1,0 +1,56 @@
+
+
+defaults
+	host = 127.0.0.1
+	port = 8000
+
+<-- API DETAILS -->
+
+1. GET hall/
+	get all hall (stored in db) with capacity 
+
+2. POST hall/<int:pk> - for creating 
+		payload example -> {'name':'A','capacity':'300'}
+
+	Similerly 
+   		UPDATE hall/<int:pk>  with payload name and capacity
+   		DELETE hall/<int:pk>
+
+
+3. All Schedulde Booked Hall with in range
+	GET schedulde_hall/
+		payload example {'start_date':'02-12-2020','end_date':'03-12-2020'}
+		*Note - date format should be in %d-%m-%Y format
+
+
+4. for hall request 
+	POST hall_request/
+	payload fields -> start_date , end_date , hall_q (for how many hall) , 
+				total_capacity_needed , booked_by (user id)
+
+	output - this api give available halls information 
+
+
+	Note - 1. this api does not book hall 
+		   2. please use date format in %d-%m-%Y %I:%M %p formats
+
+
+
+5. for hall booking 
+	POST accept_hall/
+	fields -> hall (all the hall id in list if more than one hall book needed)
+			  hallrequest -> hall request object id
+
+		for example - {"hall":[3,4,5,6],"hallrequest":54}
+			here - 3,4,5,6 are the pk of halls
+
+
+
+Note -> 1.checks and validations are not properly used 
+		2. user creation api is not created(use superuser id while creating 			request)
+		3.atomic transaction is used 
+
+
+
+
+
